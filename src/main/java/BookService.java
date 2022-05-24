@@ -1,5 +1,3 @@
-import org.elasticsearch.client.security.user.User;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

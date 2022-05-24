@@ -1,22 +1,21 @@
-import io.javalin.http.Context;
+import co.elastic.clients.elasticsearch.core.get_script_context.Context;
 import io.javalin.http.NotFoundResponse;
-import io.javalin.plugin.json.JavalinJackson;
 
 public class BookController {
 
-    public static void create(Context ctx){
+    public static void create(io.javalin.http.Context ctx){
         NewBookRequest book = ctx.bodyAsClass(NewBookRequest.class);
         Book savedBook = BookService.save(book.title, book.author);
         ctx.status(201);
-        ctx.result(new JavalinJackson().toJsonString(savedBook));
+
 
     }
 
-    public static void getAll(Context ctx) {
+    public static void getAll(io.javalin.http.Context ctx) {
         ctx.json(BookService.getAll());
     }
 
-    public static void update(Context ctx, String id) {
+    public static void update(io.javalin.http.Context ctx, String id) {
         Book book = BookService.findById(Integer.parseInt(id));
         if(book == null){
             throw new NotFoundResponse("User Not Found");
